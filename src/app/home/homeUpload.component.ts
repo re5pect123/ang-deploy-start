@@ -38,16 +38,19 @@ export class UploadComponent {
   }
 
   startUpload(): void {
+    
       console.log('URADI upload');
     const event: UploadInput = {
       type: 'uploadAll',
-      url: '192.168.100.200',
+      url: 'http://localhost:9000/upload',
       method: 'POST',
       data: { foo: 'bar' }
     };
 
     this.uploadInput.emit(event);
   }
+
+
 
   cancelUpload(id: string): void {
     this.uploadInput.emit({ type: 'cancel', id: id });
