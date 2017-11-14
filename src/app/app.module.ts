@@ -9,8 +9,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { TableComponent } from './table/table.component';
-import { UploadComponent } from 'app/home/homeUpload.component'
-import { User } from 'app/table/user.model';
+import { UploadComponent } from 'app/home/homeUpload.component';
 
 
 const appRoutes: Routes = [

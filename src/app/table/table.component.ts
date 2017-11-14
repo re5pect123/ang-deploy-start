@@ -16,7 +16,7 @@ export class TableComponent implements OnInit {
     }
   ]
 
-  constructor( private _http: HttpClient) { 
+  constructor() { 
 
 
   }
