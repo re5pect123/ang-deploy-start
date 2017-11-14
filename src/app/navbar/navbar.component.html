@@ -1,0 +1,66 @@
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid"> 
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+           <a class="navbar-brand">
+                    <img [src]="LOGO" alt="Deploy logo" class="logo">
+           </a>
+      </div>
+      <div id="navbar1" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <a class="font-size" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Ingestor</a>
+          </li>
+          <li>
+            <a class="font-size" routerLink="table" routerLinkActive="active">Table</a>
+          </li>
+          <li>
+            <a class="font-size">Deploy 1</a>
+          </li>
+          <li>
+            <a class="font-size">Deploy 2</a>
+          </li>
+          <li>
+            <a class="font-size" >Deploy 3</a>
+          </li>
+          <li>
+            <a class="font-size" >Deploy 4</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<style>
+  
+  .active {
+    color:#0070c0 !important;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .navbar-brand {
+    padding: 0px;
+  }
+
+  .navbar-brand>img {
+    height: 100%;
+    padding: 5px;
+    width: auto;
+  }
+
+  .font-size {
+    font-size: 20px;
+    margin-left: 50px;
+  }
+
+</style>
