@@ -1,42 +1,31 @@
 <div class="container">
   <div class="row">
-
-    <p *ngFor="let product of products" ngDefaultControl> "post" + {{ product.productName }}</p>
-    <p *ngFor="let product of products" ngDefaultControl> "post" + {{ product.productId }}</p>
-   <button (click)="sendGetRequest()"> Button</button>
+    <input #find class="form-control input-sm" placeholder="Client name" style="width:240px;"/>
+    <button (click) = 'sendForFind(find.value)' class="btn btn-primary btn-sm"> Search </button>
+    
+    <button (click)="loadTableData()"> Load Data</button>
+    <br><br>
       <table class="table table-bordered">
           <thead>
             <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
+              <th>id</th>
+              <th>Client name</th>
+              <th>Amount</th>
+              <th>Timestamp</th>
+              <th>Input date</th>
+              <th>Source</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+             <tr *ngFor="let data of DataArray">
+              <th>{{ data.id }}</th>
+              <td><a href="/getclient/{{data.clientName}}">{{ data.clientName }}</a></td>
+              <td>{{ data.amount}}</td>
+              <td>{{ data.timestamp}}</td>
+              <td>{{ data.inputDate}}</td>
+              <td>{{ data.source}}</td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@TwBootstrap</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            
           </tbody>
         </table>
 

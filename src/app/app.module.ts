@@ -12,6 +12,8 @@ import { TableComponent } from './table/table.component';
 import { UploadComponent } from 'app/home/homeUpload.component';
 
 
+
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -20,7 +22,7 @@ const appRoutes: Routes = [
   {
     path: 'table',
     component: TableComponent
-  },
+  }
 ];
 
 @NgModule({

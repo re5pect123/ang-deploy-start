@@ -1,11 +1,14 @@
 import { Component, EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
-
+import { RequestService } from "app/home/request.service";
+import { Http, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'upload',
-  templateUrl: 'app-home.component.html'
+  templateUrl: 'app-home.component.html',
+  providers:[RequestService]
 })
 export class UploadComponent {
+  createUserService: any;
   options: UploaderOptions;
   formData: FormData;
   files: UploadFile[];
@@ -13,11 +16,37 @@ export class UploadComponent {
   humanizeBytes: Function;
   dragOver: boolean;
 
-  constructor() { 
+  DataArray: any = [];
+
+  constructor(private requestService: RequestService, private http: Http) { 
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>(); 
     this.humanizeBytes = humanizeBytes;
   }
+
+  loadTableData(){
+    this.requestService.sendGetRequest().subscribe(
+      data => {
+        this.DataArray = data;
+        console.log(data);
+      });
+      
+  }
+
+  sendGetRequest(){
+    console.log("Usao u metod za slanje GET requsta --> idemo u service!")
+    this.requestService.sendGetRequest()
+    .subscribe(
+        data => this.getResult = JSON.stringify(data),
+        error => alert(error),
+        () => console.log("Finished")
+    );
+    
+    this.requestService.sendGetRequest();
+    this.getResult = this.requestService.getResult;
+  }
+
+  
 
   onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') { 
@@ -38,18 +67,26 @@ export class UploadComponent {
   }
 
   startUpload(): void {
-    
-      console.log('URADI upload');
+
     const event: UploadInput = {
       type: 'uploadAll',
-      url: 'http://localhost:9000/upload',
+      url: 'http://localhost:8000/upload',
       method: 'POST',
       data: { foo: 'bar' }
+      
     };
-
-    this.uploadInput.emit(event);
+  //  this.uploadInput.emit(event);
+        const headers1 = new Headers({ 'Content-Type': 'application/json'});
+        let options = new RequestOptions({ headers: headers1 });
+        console.log("NOVA METODA")
+        this.http.post('http://localhost:8000/upload', this.uploadInput.emit(event), options).map(response => response.json())
+          .subscribe(
+            () => {console.log('Success')}
+          );
   }
 
+    getResult: string;
+    postResult: string;
 
 
   cancelUpload(id: string): void {
@@ -62,5 +99,12 @@ export class UploadComponent {
 
   removeAllFiles(): void {
     this.uploadInput.emit({ type: 'removeAll' });
+  }
+  
+  sendPostRequest(){
+    console.log("Usao u metod za slanje post requesta --> idemo u service!");
+    this.requestService.sendPostRequest();
+    this.postResult = this.requestService.postResult;
+    
   }
 }
